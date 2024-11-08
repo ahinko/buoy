@@ -26,7 +26,7 @@ RUN \
   zfs
 
 COPY --from=ghcr.io/siderolabs/talosctl:v1.8.0 /talosctl /usr/local/bin/talosctl
-COPY --from=registry.k8s.io/kubectl:v1.31.1 /bin/kubectl /usr/local/bin/kubectl
+COPY --from=registry.k8s.io/kubectl:v1.31.2 /bin/kubectl /usr/local/bin/kubectl
 
 #hadolint ignore=DL3018
 RUN \
