@@ -91,18 +91,25 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract semver
+        run: |
+          if [[ "${{ ${{needs.release.outputs.new_version}} }}" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            echo "MAJOR=${BASH_REMATCH[1]}" >> $GITHUB_ENV
+            echo "MINOR=${BASH_REMATCH[2]}" >> $GITHUB_ENV
+            echo "PATCH=${BASH_REMATCH[3]}" >> $GITHUB_ENV
+            echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
+          fi
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5.5.1
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=schedule
             type=ref,event=branch
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}.{{patch}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=raw,value=${{ env.MAJOR }}
+            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}
+            type=raw,value=${{ env.VERSION }}
             type=sha
 
       - name: Build and push
