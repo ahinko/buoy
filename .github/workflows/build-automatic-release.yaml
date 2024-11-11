@@ -95,8 +95,8 @@ jobs:
         id: semver
         run: |
           if [[ "${{needs.release.outputs.new_version}}" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
-            echo "MAJOR=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
-            echo "MINOR=${BASH_REMATCH[2]}" >> $GITHUB_OUTPUT
+            echo "MAJOR=${BASH_REMATCH[1]}" >> "$GITHUB_OUTPUT"
+            echo "MINOR=${BASH_REMATCH[2]}" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Extract metadata (tags, labels) for Docker
