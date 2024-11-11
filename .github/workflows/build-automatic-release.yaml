@@ -96,8 +96,6 @@ jobs:
           if [[ "${{needs.release.outputs.new_version}}" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
             echo "MAJOR=${BASH_REMATCH[1]}" >> $GITHUB_ENV
             echo "MINOR=${BASH_REMATCH[2]}" >> $GITHUB_ENV
-            echo "PATCH=${BASH_REMATCH[3]}" >> $GITHUB_ENV
-            echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
           fi
 
       - name: Extract metadata (tags, labels) for Docker
@@ -109,7 +107,7 @@ jobs:
             type=ref,event=branch
             type=raw,value=${{ process.env.MAJOR }}
             type=raw,value=${{ process.env.MAJOR }}.${{ process.env.MINOR }}
-            type=raw,value=${{ process.env.VERSION }}
+            type=raw,value=${{needs.release.outputs.new_version}}
             type=sha
 
       - name: Build and push
