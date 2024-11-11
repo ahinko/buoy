@@ -92,10 +92,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract semver
+        id: semver
         run: |
           if [[ "${{needs.release.outputs.new_version}}" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
-            echo "MAJOR=${BASH_REMATCH[1]}" >> $GITHUB_ENV
-            echo "MINOR=${BASH_REMATCH[2]}" >> $GITHUB_ENV
+            echo "MAJOR=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
+            echo "MINOR=${BASH_REMATCH[2]}" >> $GITHUB_OUTPUT
           fi
 
       - name: Extract metadata (tags, labels) for Docker
@@ -105,8 +106,8 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref,event=branch
-            type=raw,value=${{ env.MAJOR }}
-            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}
+            type=raw,value=${{ steps.semver.outputs.MAJOR }}
+            type=raw,value=${{ steps.semver.outputs.MAJOR }}.${{ steps.semver.outputs.MINOR }}
             type=raw,value=${{needs.release.outputs.new_version}}
             type=sha
 
