@@ -93,7 +93,7 @@ jobs:
 
       - name: Extract semver
         run: |
-          if [[ "${{ ${{needs.release.outputs.new_version}} }}" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+          if [[ "${{needs.release.outputs.new_version}}" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
             echo "MAJOR=${BASH_REMATCH[1]}" >> $GITHUB_ENV
             echo "MINOR=${BASH_REMATCH[2]}" >> $GITHUB_ENV
             echo "PATCH=${BASH_REMATCH[3]}" >> $GITHUB_ENV
