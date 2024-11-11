@@ -107,9 +107,9 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref,event=branch
-            type=raw,value=${{ env.MAJOR }}
-            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}
-            type=raw,value=${{ env.VERSION }}
+            type=raw,value=${{ process.env.MAJOR }}
+            type=raw,value=${{ process.env.MAJOR }}.${{ process.env.MINOR }}
+            type=raw,value=${{ process.env.VERSION }}
             type=sha
 
       - name: Build and push
