@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/alpine:3.21.2
+FROM public.ecr.aws/docker/library/alpine:3.21.3
 
 ENV UMASK="0002" \
   TZ="Etc/UTC"
