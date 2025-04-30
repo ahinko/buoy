@@ -25,7 +25,7 @@ RUN \
   rsync \
   zfs
 
-COPY --from=ghcr.io/siderolabs/talosctl:v1.9.5 /talosctl /usr/local/bin/talosctl
+COPY --from=ghcr.io/siderolabs/talosctl:v1.10.0 /talosctl /usr/local/bin/talosctl
 COPY --from=registry.k8s.io/kubectl:v1.33.0 /bin/kubectl /usr/local/bin/kubectl
 
 #hadolint ignore=DL3018
