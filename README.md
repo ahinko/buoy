@@ -1,3 +1,1 @@
-# buoy
-
-A small, highly opinionated, Docker image including miscellaneous tools for handling and running different tasks in a Kubernetes cluster.
+This repo has been archived. I've moved my buoy container to my ahinko/containers repo instead.
